@@ -6,6 +6,7 @@
 namespace ariel{
     class Notebook{
         private:
+            const static int min_num = 0;
             std::map<int,Page> book;
 
         public:

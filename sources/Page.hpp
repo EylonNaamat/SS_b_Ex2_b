@@ -7,6 +7,7 @@ namespace ariel{
     class Page{
         private:
         const static int row_length = 100;
+        const static int min_num = 0;
         std::map<int, std::vector<char>> pg;
 
 

@@ -4,6 +4,10 @@
 
 
 void ariel::Notebook::write(int page, int row, int column, ariel::Direction direction, const std::string& text){
+    if(page < min_num){
+        throw std::invalid_argument("page number cant be less than 0!");
+    }
+    
     if(book.find(page) == book.end()){
         Page p;
         std::pair<int, Page> pr;
@@ -14,6 +18,10 @@ void ariel::Notebook::write(int page, int row, int column, ariel::Direction dire
     book[page].write(row, column, direction, text);
 }
 std::string ariel::Notebook::read(int page, int row, int column, ariel::Direction direction, int length){
+    if(page < min_num){
+        throw std::invalid_argument("page number cant be less than 0!");
+    }
+    
     if(book.find(page) == book.end()){
         Page p;
         std::pair<int, Page> pr;
@@ -24,6 +32,10 @@ std::string ariel::Notebook::read(int page, int row, int column, ariel::Directio
     return book[page].read(row, column, direction, length);
 }
 void ariel::Notebook::erase(int page, int row, int column, ariel::Direction direction, int length){
+    if(page < min_num){
+        throw std::invalid_argument("page number cant be less than 0!");
+    }
+    
     if(book.find(page) == book.end()){
         Page p;
         std::pair<int, Page> pr;
@@ -34,6 +46,10 @@ void ariel::Notebook::erase(int page, int row, int column, ariel::Direction dire
     book[page].erase(row, column, direction, length);
 }
 void ariel::Notebook::show(int page){
+    if(page < min_num){
+        throw std::invalid_argument("page number cant be less than 0!");
+    }
+    
     if(book.find(page) == book.end()){
         Page p;
         std::pair<int, Page> pr;

@@ -7,6 +7,9 @@
 
 
 void ariel::Page::write(int row, int col, ariel::Direction direction, const std::string& text){
+    if(row < min_num || col < min_num){
+        throw std::invalid_argument("row or col number cant be less than 0!");
+    }
     if(col > row_length){
         throw std::invalid_argument("col number should be less than 100");
     }
@@ -89,6 +92,9 @@ void ariel::Page::write_vertical(int row, int col, const std::string& text){
 }
 
 std::string ariel::Page::read(int row, int col, ariel::Direction direction, int length){
+    if(row < min_num || col < min_num || length < min_num){
+        throw std::invalid_argument("row or col or length number cant be less than 0!");
+    }
     if(col > row_length){
         throw std::invalid_argument("col number should be less than 100");
     }
@@ -134,6 +140,10 @@ std::string ariel::Page::read_vertical(int row, int col, int length){
 }
 
 void ariel::Page::erase(int row, int col, ariel::Direction direction, int length){
+    if(row < min_num || col < min_num || length < min_num){
+        throw std::invalid_argument("row or col or length number cant be less than 0!");
+    }
+    
     if(col > row_length){
         throw std::invalid_argument("col number should be less than 100");
     }
