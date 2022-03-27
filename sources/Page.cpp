@@ -10,20 +10,20 @@ void ariel::Page::write(int row, int col, ariel::Direction direction, const std:
     if(row < min_num || col < min_num){
         throw std::invalid_argument("row or col number cant be less than 0!");
     }
-    if(col > row_length){
+    if(col >= row_length){
         throw std::invalid_argument("col number should be less than 100");
     }
 
-    if(int(text.size()) > row_length){
+    if(int(text.size()) > row_length && direction == ariel::Direction::Horizontal){
         throw std::invalid_argument("cant write more than 100");
     }
 
-    if(col + (int)(text.size()) > row_length){
+    if(col + (int)(text.size()) > row_length && direction == ariel::Direction::Horizontal){
         throw std::invalid_argument("cant write more than 100 chars");
     }
 
     for(int i = 0; i < (int)(text.size()); ++i){
-        if(text[(uint)(i)] == '~'){
+        if(text[(uint)(i)] < char_min || text[(uint)(i)] > char_max){
             throw std::invalid_argument("cant write ~");
         }
     }
@@ -87,7 +87,6 @@ void ariel::Page::write_vertical(int row, int col, const std::string& text){
             pg.insert(p);
         }
         pg[i][(uint)(col)] = text[(uint)(j)];
-        
     }
 }
 
@@ -95,15 +94,15 @@ std::string ariel::Page::read(int row, int col, ariel::Direction direction, int 
     if(row < min_num || col < min_num || length < min_num){
         throw std::invalid_argument("row or col or length number cant be less than 0!");
     }
-    if(col > row_length){
+    if(col >= row_length){
         throw std::invalid_argument("col number should be less than 100");
     }
 
-    if(length > row_length){
+    if(length > row_length && direction == ariel::Direction::Horizontal){
         throw std::invalid_argument("cant read more than 100");
     }
 
-    if(col + length > row_length){
+    if(col + length > row_length && direction == ariel::Direction::Horizontal){
         throw std::invalid_argument("cant read more than 100 chars");
     }
 
@@ -144,15 +143,15 @@ void ariel::Page::erase(int row, int col, ariel::Direction direction, int length
         throw std::invalid_argument("row or col or length number cant be less than 0!");
     }
     
-    if(col > row_length){
+    if(col >= row_length){
         throw std::invalid_argument("col number should be less than 100");
     }
 
-    if(length > row_length){
+    if(length > row_length && direction == ariel::Direction::Horizontal){
         throw std::invalid_argument("cant erase more than 100");
     }
 
-    if(col + length > row_length){
+    if(col + length > row_length && direction == ariel::Direction::Horizontal){
         throw std::invalid_argument("cant erase more than 100 chars");
     }
 

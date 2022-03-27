@@ -8,6 +8,8 @@ namespace ariel{
         private:
         const static int row_length = 100;
         const static int min_num = 0;
+        const static int char_min = 32;
+        const static int char_max = 125;
         std::map<int, std::vector<char>> pg;
 
 

@@ -63,16 +63,16 @@ int main(){
 
 
 
-    ariel::Notebook book;
-    book.write(1, 0, 0, ariel::Direction::Horizontal, "my name is eylon");
+    // ariel::Notebook book;
+    // book.write(1, 0, 0, ariel::Direction::Horizontal, "my name is eylon");
     // (book.write(1,0,0,ariel::Direction::Horizontal, "my name is"));
-    book.erase(1, 0, 0, ariel::Direction::Horizontal, 16);
+    // book.erase(1, 0, 0, ariel::Direction::Horizontal, 16);
     // (book.write(1,0,0,ariel::Direction::Horizontal, "my name is"));
 
-    (book.erase(2,0,0,ariel::Direction::Horizontal, 5));
+    // (book.erase(2,0,0,ariel::Direction::Horizontal, 5));
 
-    book.erase(1,0,0,ariel::Direction::Horizontal, 16);
-    (book.erase(1,0,0,ariel::Direction::Horizontal, 5));
+    // book.erase(1,0,0,ariel::Direction::Horizontal, 16);
+    // (book.erase(1,0,0,ariel::Direction::Horizontal, 5));
 
     // (book.write(2,0,99,ariel::Direction::Horizontal, "eylon"));
 
@@ -90,6 +90,16 @@ int main(){
     // (book.write(8,0,8, ariel::Direction::Vertical, "cpp"));
 
     // (book.read(9,0,101, ariel::Direction::Horizontal, 5));
+
+
+        for ( int i=100; i<200;i++){
+        ariel::Notebook note;
+        
+        
+        note.write(1,i-100,0,ariel::Direction::Vertical,"Look at me");
+        note.write(1,i-100,2,ariel::Direction::Horizontal,"I'm Mr. meeseeks");
+        
+        }
 
     return 0;
 }

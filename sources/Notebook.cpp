@@ -2,7 +2,6 @@
 #include "Notebook.hpp"
 #include "Direction.hpp"
 
-
 void ariel::Notebook::write(int page, int row, int column, ariel::Direction direction, const std::string& text){
     if(page < min_num){
         throw std::invalid_argument("page number cant be less than 0!");
