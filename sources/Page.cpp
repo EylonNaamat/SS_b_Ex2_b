@@ -5,7 +5,19 @@
 #include <algorithm>
 #include <iostream>
 
-
+/**
+ * @brief write function. gets number of row, col, direction of writing and the text and writes it in the notebook
+ * first we check if the input is good, if not throw excption
+ * if the text size is bigger than 100  or col + text size is bigger than 100 and the direction is horizantal throw exception
+ * than we check if the text inserted is good, if not throw exception
+ * if the direction is horizantal we go to write_horizantal func
+ * if the direction is vertical we go to write_vertical func
+ * 
+ * @param row 
+ * @param col 
+ * @param direction 
+ * @param text 
+ */
 void ariel::Page::write(int row, int col, ariel::Direction direction, const std::string& text){
     if(row < min_num || col < min_num){
         throw std::invalid_argument("row or col number cant be less than 0!");
@@ -35,6 +47,17 @@ void ariel::Page::write(int row, int col, ariel::Direction direction, const std:
     }
 }
 
+/**
+ * @brief in this function we first check if the row already exsits in the map
+ * if not, we create one and fill it with '_'
+ * and then write the text in the notebook, and inserting the row to the map
+ * if so, we check if we would write over something written, if so throw exception
+ * if not, we write the text
+ * 
+ * @param row 
+ * @param col 
+ * @param text 
+ */
 void ariel::Page::write_horizontal(int row, int col, const std::string& text){
     int size = col + (int)(text.size());
     int j = 0;
@@ -64,6 +87,16 @@ void ariel::Page::write_horizontal(int row, int col, const std::string& text){
     }
 }
 
+/**
+ * @brief in this function we first check if in the exsisting rows theres something written in the place we want to write
+ * if so throw exception
+ * then we check if the row dont exist, if not we create a new one
+ * then we write the text
+ * 
+ * @param row 
+ * @param col 
+ * @param text 
+ */
 void ariel::Page::write_vertical(int row, int col, const std::string& text){
     int size = row + (int)(text.size());
     int j = 0;
@@ -90,6 +123,20 @@ void ariel::Page::write_vertical(int row, int col, const std::string& text){
     }
 }
 
+/**
+ * @brief in this function we check the input first, if the row, col, and length are under 0 throw exception
+ * if the col number bigger than 100, throw exception
+ * if the driection is horizantal we check if the text length or the text length + col is bigger than 100
+ * if so throw exception
+ * if the direction is horizantal we go to read_horizantal
+ * if the direction is verrtical we go to read_vertical
+ * 
+ * @param row 
+ * @param col 
+ * @param direction 
+ * @param length 
+ * @return std::string 
+ */
 std::string ariel::Page::read(int row, int col, ariel::Direction direction, int length){
     if(row < min_num || col < min_num || length < min_num){
         throw std::invalid_argument("row or col or length number cant be less than 0!");
@@ -112,6 +159,15 @@ std::string ariel::Page::read(int row, int col, ariel::Direction direction, int 
     return read_vertical(row, col, length); 
 }
 
+/**
+ * @brief in this function we check if the row exist if so we write it in ans
+ * if not we insert ans '_' in the right length (we dont create a row if it not exist)
+ * 
+ * @param row 
+ * @param col 
+ * @param length 
+ * @return std::string 
+ */
 std::string ariel::Page::read_horizontal(int row, int col, int length){
     std::string ans;
     if(pg.find(row) != pg.end()){
@@ -126,6 +182,16 @@ std::string ariel::Page::read_horizontal(int row, int col, int length){
     return ans;
 }
 
+/**
+ * @brief in this function we check if the rows exist if so we write the char at the right location
+ * into ans
+ * if not, we insert ans '_'
+ * 
+ * @param row 
+ * @param col 
+ * @param length 
+ * @return std::string 
+ */
 std::string ariel::Page::read_vertical(int row, int col, int length){
     std::string ans;
     for(int i = row; i < row+length; ++i){
@@ -138,6 +204,19 @@ std::string ariel::Page::read_vertical(int row, int col, int length){
     return ans;
 }
 
+/**
+ * @brief in this function we check the input first, if the row, col, and length are under 0 throw exception
+ * if the col number bigger than 100, throw exception
+ * if the driection is horizantal we check if the text length or the text length + col is bigger than 100
+ * if so throw exception
+ * if the direction is horizantal we go to erase_horizantal
+ * if the direction is vertical we go to erase_vertical
+ * 
+ * @param row 
+ * @param col 
+ * @param direction 
+ * @param length 
+ */
 void ariel::Page::erase(int row, int col, ariel::Direction direction, int length){
     if(row < min_num || col < min_num || length < min_num){
         throw std::invalid_argument("row or col or length number cant be less than 0!");
@@ -162,6 +241,14 @@ void ariel::Page::erase(int row, int col, ariel::Direction direction, int length
     }
 }
 
+/**
+ * @brief in this function we check if the row exist in the map, if not we create it
+ * and then write '~' in the place needed
+ * 
+ * @param row 
+ * @param col 
+ * @param length 
+ */
 void ariel::Page::erase_horizontal(int row, int col, int length){
     if(pg.find(row) == pg.end()){
         std::vector<char> r(row_length, '_');
@@ -175,6 +262,14 @@ void ariel::Page::erase_horizontal(int row, int col, int length){
     }
 }
 
+/**
+ * @brief in this function we check if the rows exist, if not we create new ones and inserting it to map
+ * and then write '~' in the right place
+ * 
+ * @param row 
+ * @param col 
+ * @param length 
+ */
 void ariel::Page::erase_vertical(int row, int col, int length){
     for(int i = row; i < row+length; ++i){
         if(pg.find(i) == pg.end()){
@@ -188,6 +283,11 @@ void ariel::Page::erase_vertical(int row, int col, int length){
     }
 }
 
+/**
+ * @brief in this function we show all the page, the format is number of row. text
+ * we go throw all rows in map and printing it
+ * 
+ */
 void ariel::Page::show(){
     for(auto itr = pg.begin(); itr != pg.end(); ++itr){
         int row_num = itr->first; 
